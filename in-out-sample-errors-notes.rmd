@@ -1,0 +1,50 @@
+---
+title: "In and Out of Sample Errors"
+author: "Hector Hernandez"
+date: "February 14, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## In Sample Error
+The error rate you get on the same data set you used to build your predictor. Sometimes called ** resubstitution error **
+
+## Out of Sample Error
+The error rate you get on a new data set. Sometimes called generalization error.
+
+## Key Ideas
+1. Out of sample error is what you care about
+2. In sample error < out of sample error
+3. The reason is overfitting
+  a) Matching your algorithm to the data you have.
+
+### Example
+In the below graph the spam is represented with the red dots and ham is represented with black dots.The idea of this graph is to show the average capital letters contained in a message. Greater the average the more likely is a spam message.
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(kernlab)
+data(spam)
+set.seed(333)
+smallSpam <- spam[sample(dim(spam)[1],size=10),]
+spamLabel <- (smallSpam$type == "spam")*1+1
+plot(smallSpam$capitalAve, col = spamLabel)
+
+```
+
+In the graph we can appreciate that spam messages (red dots) have a higher average of capital letters compared to ham emails. So we can define a:
+
+#### Prediction Rule 1
+* capitalAve > 2.7 = "spam"
+* capitalAve < 2.4 = "nonspam"
+
+We can also 
+
+
+
+
+
+
+
+
