@@ -39,12 +39,59 @@ In the graph we can appreciate that spam messages (red dots) have a higher avera
 * capitalAve > 2.7 = "spam"
 * capitalAve < 2.4 = "nonspam"
 
-We can also 
+We can also see in the graph a spam value that is a little below the "nonspam" rule, so we can tweak or rule to capture that value
+
+* capitalAve 2.4 and 2.45 = "spam"
+* capitalAve 2.45 and 2.7 = "nonspam"
+
+And this is to get our training set accuracy perfect with this new rule.
+
+```{r}
+rule1 <- function(x){
+  prediction <- rep(NA,length(x))
+  prediction[x > 2.7] <- "spam"
+  prediction[x < 2.40] <- "nonspam"
+  prediction[(x >= 2.40 & x <= 2.45)] <- "spam"
+  prediction[(x > 2.45 & x <= 2.70)] <- "nonspam"
+  return(prediction)
+}
+table(rule1(smallSpam$capitalAve),smallSpam$type)
+```
+
+#### Prediction Rule 2
+* capitalAve > 2.4 = "spam"
+* capitalAve <= 2.4 = "nonspam"
+
+We can modify the rule to make it less specific to our training set and more general. The result is the next:
+
+```{r}
+rule2 <- function(x){
+  prediction <- rep(NA,length(x))
+  prediction[x > 2.8] <- "spam"
+  prediction[x <= 2.8] <- "nonspam"
+  return(prediction)
+}
+table(rule2(smallSpam$capitalAve),smallSpam$type)
+```
 
 
+When we apply both
 
+```{r, dependson="loadData"}
+table(rule1(spam$capitalAve),spam$type)
+table(rule2(spam$capitalAve),spam$type)
+mean(rule1(spam$capitalAve)==spam$type)
+mean(rule2(spam$capitalAve)==spam$type)
+```
 
+---
 
+## Look at accuracy
+
+```{r, dependson="loadData"}
+sum(rule1(spam$capitalAve)==spam$type)
+sum(rule2(spam$capitalAve)==spam$type)
+```
 
 
 
