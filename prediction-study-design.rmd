@@ -1,0 +1,57 @@
+---
+title: "Prediction Study Design"
+author: "Hector Hernandez"
+date: "February 15, 2017"
+output: html_document
+---
+
+## Prediction Study Design
+1. Define error rate
+
+2. Split data into:
+  a) Training, testing and validation (optional)
+  
+3. On the trainig set pick features
+  a) Use cross-validation
+  
+4. On the training set prediction function
+  a) Use cross-validation
+  
+5. If no validation
+  a) Apply 1x to test set
+  
+6. If validation
+  a) Apply to test set and refine
+  b) Apply 1x to validation
+
+## Rules of thumb for prediction study design
+1. If you have a large sample size
+  a) 60% training
+  b) 20% test
+  c) 20% validation
+  
+2. If you have a medium sample size
+  a) 60% training
+  b) 40% testing
+  
+3. If you have a small sample size
+  a) Do cross validation
+  b) Report caveat of small sample size
+  
+## Some priciples to remember
+1. Set the test/validation set aside and don't look at it
+
+2. In general **randomly** sample training and test
+
+3. Your data sets must reflect structure of the problem
+  a) If predictions evolve with time split train/test in time chunks 
+  
+4. All subsets should reflect as much diversity as possible
+  a) Random assignment does this
+  b) You can also try to balance by features -  but this is tricky
+  
+
+
+
+
+

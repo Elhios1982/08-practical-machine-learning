@@ -75,23 +75,40 @@ table(rule2(smallSpam$capitalAve),smallSpam$type)
 ```
 
 
-When we apply both
+When we apply both prediction models to the full data set, we notice the second rule is more accurate
 
-```{r, dependson="loadData"}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, dependson="loadData"}
 table(rule1(spam$capitalAve),spam$type)
 table(rule2(spam$capitalAve),spam$type)
 mean(rule1(spam$capitalAve)==spam$type)
 mean(rule2(spam$capitalAve)==spam$type)
 ```
 
----
+### Look at accuracy
 
-## Look at accuracy
-
-```{r, dependson="loadData"}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, dependson="loadData"}
 sum(rule1(spam$capitalAve)==spam$type)
 sum(rule2(spam$capitalAve)==spam$type)
 ```
+
+Every data set has two parts:
+1. Signal
+2. Noise
+
+The goal of the predictor is to find the signal and ignore the noise
+
+## In Sample Errors
+Errors on the training we actually built
+
+## Out of Sample Error
+Errors on the data set that wasn't used to build the training predictor
+
+## Overfitting
+The goal is not to overfit models, we want to build models simple and robust enough to don't capture the noise, while they do capture the signal
+
+
+
+
 
 
 
